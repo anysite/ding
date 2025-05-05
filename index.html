@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <title>פעמון</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+    button {
+      font-size: 2em;
+      padding: 20px 40px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button id="bellButton">התחל צלצול</button>
+  <audio id="bellSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0d304a7c6a.mp3?filename=notification-101239.mp3" preload="auto"></audio>
+
+  <script>
+    const button = document.getElementById('bellButton');
+    const bell = document.getElementById('bellSound');
+    let intervalId = null;
+
+    button.addEventListener('click', () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+        button.textContent = 'התחל צלצול';
+      } else {
+        bell.play();
+        intervalId = setInterval(() => {
+          bell.currentTime = 0;
+          bell.play();
+        }, 1000);
+        button.textContent = 'הפסק צלצול';
+      }
+    });
+  </script>
+</body>
+</html>
